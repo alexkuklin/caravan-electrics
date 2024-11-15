@@ -10,7 +10,7 @@
             const capacity = document.getElementById("capacity").value;
             const batteryType = document.getElementById("battery-type").value;
             const inverterEff = document.getElementById("invertereff").value;
-            const voltage = 12; // Voltage of the battery system
+            const voltage = document.getElementById("battery-voltage").value;
             
             // Current draw calculation
             const current = power / voltage;
@@ -63,6 +63,15 @@
             <option value="lifepo4">LiFePO4</option>
         </select>
 		    </tr>
+		    <tr>
+			    <td>
+
+        <label for="battery-voltage">Enter Battery Voltage (volts):</label>
+			    </td>
+		            <td>
+        <input type="number" id="battery-voltage" required value="12">
+		    </tr>
+
 		    <tr>
 			    <td>
 
