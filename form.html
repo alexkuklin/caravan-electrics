@@ -13,7 +13,7 @@
             const voltage = document.getElementById("battery-voltage").value;
             
             // Current draw calculation
-            const current = power / voltage;
+            const current = 100 *  ( power / voltage ) inverterEff;
             document.getElementById("result").innerText = "Current Draw: " + current.toFixed(2) + " Amps";
             
             // Calculate usable battery capacity based on battery type
@@ -25,7 +25,7 @@
             }
 
             // Calculate time to handle the load
-            const timeHours = 100 *  ( usableCapacity / current) / inverterEff;
+            const timeHours = usableCapacity / current;
             document.getElementById("time-result").innerText = "Estimated Time to Handle Load: " + timeHours.toFixed(2) + " hours";
             document.getElementById("effective-capacity").innerText = "Usable capacity: " + usableCapacity + "Ah";
         }
@@ -91,5 +91,10 @@
     <p id="result"></p>
     <p id="effective-capacity"></p>
     <p id="time-result"></p>
+
+    <p>
+    	Cable size calculator - <a href="https://www.fabhabs.com/dc-cable-sizing-calculator" target="_blank" rel="noopener noreferrer">here</a>
+    </p>
+
 </body>
 </html>
