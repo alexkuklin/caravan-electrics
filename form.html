@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Draw Calculator</title>
+    <script>
+        function calculateCurrentAndTime() {
+            const power = document.getElementById("power").value;
+            const capacity = document.getElementById("capacity").value;
+            const batteryType = document.getElementById("battery-type").value;
+            const inverterEff = document.getElementById("invertereff").value;
+            const voltage = 12; // Voltage of the battery system
+            
+            // Current draw calculation
+            const current = power / voltage;
+            document.getElementById("result").innerText = "Current Draw: " + current.toFixed(2) + " Amps";
+            
+            // Calculate usable battery capacity based on battery type
+            let usableCapacity;
+            if (batteryType === "lead-acid") {
+                usableCapacity = capacity * 0.5; // 50%
+            } else if (batteryType === "lifepo4") {
+                usableCapacity = capacity * 0.8; // 80%
+            }
+
+            // Calculate time to handle the load
+            const timeHours = 100 *  ( usableCapacity / current) / inverterEff;
+            document.getElementById("time-result").innerText = "Estimated Time to Handle Load: " + timeHours.toFixed(2) + " hours";
+            document.getElementById("effective-capacity").innerText = "Usable capacity: " + usableCapacity + "Ah";
+        }
+    </script>
+</head>
+<body>
+    <h1>Current Draw Calculator</h1>
+    <form onsubmit="event.preventDefault(); calculateCurrentAndTime();">
+	    <table>
+		    <tr>
+			    <td>
+        <label for="power">Enter Power Consumption (Watts):</label>
+			    </td>
+		            <td>
+        <input type="number" id="power" required value=1000>
+			    </td>
+		    </tr>
+
+		    <tr>
+			    <td>
+
+        <label for="capacity">Enter Battery Capacity (Ah):</label>
+			    </td>
+		            <td>
+        <input type="number" id="capacity" required value="100"> 
+		    </tr>
+
+		    <tr>
+			    <td>
+        <label for="battery-type">Select Battery Type:</label>
+			    </td>
+		            <td>
+        <select id="battery-type">
+            <option value="lead-acid">Lead-Acid</option>
+            <option value="lifepo4">LiFePO4</option>
+        </select>
+		    </tr>
+		    <tr>
+			    <td>
+
+        <label for="invertereff">Enter Inverter efficiency (%):</label>
+			    </td>
+		            <td>
+        <input type="number" id="invertereff" value="95"  required>
+		    </tr>
+
+		    <tr>
+			    <td>
+        <button type="submit">Calculate</button>
+			    </td>
+		    </tr>
+	    </table>
+    </form>
+    <p id="result"></p>
+    <p id="effective-capacity"></p>
+    <p id="time-result"></p>
+</body>
+</html>
