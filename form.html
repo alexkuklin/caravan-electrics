@@ -13,7 +13,7 @@
             const voltage = document.getElementById("battery-voltage").value;
             
             // Current draw calculation
-            const current = 100 *  ( power / voltage ) inverterEff;
+            const current = 100 *  ( power / voltage ) * inverterEff;
             document.getElementById("result").innerText = "Current Draw: " + current.toFixed(2) + " Amps";
             
             // Calculate usable battery capacity based on battery type
